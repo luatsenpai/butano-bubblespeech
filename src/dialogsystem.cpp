@@ -574,17 +574,22 @@ void dialog_system::_show_current_page()
            " width=", name_width);
 
     const bn::fixed tail_top_left_x = tail_screen_top_left_x;
-    const bn::fixed tail_top_left_y = tail_screen_top_left_y;
+    const bn::fixed tail_top_left_y = page.type == box_type::think ? tail_screen_top_left_y - 1 : tail_screen_top_left_y;
     const bn::fixed box_top_left_x = box_screen_top_left_x;
     const bn::fixed box_top_left_y = box_screen_top_left_y;
     const bn::fixed name_top_left_x = name_screen_top_left_x;
     const bn::fixed name_top_left_y = name_screen_top_left_y;
 
-    _tail_sprite = sprite_item_for_tail(page.type).create_sprite(0, 0);
-    _tail_sprite->set_bg_priority(0);
-    _tail_sprite->set_z_order(0);
-    _tail_sprite->set_top_left_position(tail_top_left_x, tail_top_left_y);
-    _tail_sprite->set_visible(true);
+    // Shout box keeps the same vertical layout spacing as boxes with tails,
+    // but it does not render a tail sprite.
+    if(page.type != box_type::shout)
+    {
+        _tail_sprite = sprite_item_for_tail(page.type).create_sprite(0, 0);
+        _tail_sprite->set_bg_priority(0);
+        _tail_sprite->set_z_order(-5);
+        _tail_sprite->set_top_left_position(tail_top_left_x, tail_top_left_y);
+        _tail_sprite->set_visible(true);
+    }
 
     const bn::sprite_item& box_item = sprite_item_for_box(page.type);
 

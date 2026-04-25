@@ -55,7 +55,7 @@ private:
     static constexpr int _max_box_sprites = 48;
     static constexpr int _max_name_box_sprites = 8;
     static constexpr int _line_height = 16;
-    static constexpr int _text_padding = 4;
+    static constexpr int _text_padding = 8;
     static constexpr int _content_max_width = 112;
     static constexpr int _box_height = _text_padding * 2 + _line_height * 3;
     static constexpr int _tile_size = 16;
